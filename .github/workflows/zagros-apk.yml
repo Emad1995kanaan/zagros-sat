@@ -41,7 +41,8 @@ jobs:
           KS_B64: ${{ secrets.BRAND_KEYSTORE_B64 }}
         run: |
           if [ -n "$KS_B64" ]; then
-            echo "$KS_B64" | base64 -d > "$RUNNER_TEMP/brand.jks"
+            # Accolé depuis le chat : on enlève espaces et retours à la ligne avant de décoder.
+            printf '%s' "$KS_B64" | tr -d '[:space:]' | base64 -d > "$RUNNER_TEMP/brand.jks"
             echo "BRAND_KEYSTORE=$RUNNER_TEMP/brand.jks" >> "$GITHUB_ENV"
             echo "HAS_KEY=true" >> "$GITHUB_ENV"
           else
@@ -56,6 +57,10 @@ jobs:
           TMDB_KEY: ${{ secrets.TMDB_KEY }}
           MSG_TOPIC: ${{ secrets.MSG_TOPIC }}
         run: |
+          # Secrets collés à la main : on enlève les espaces / retours à la ligne en trop.
+          trim() { printf '%s' "$1" | tr -d '[:space:]'; }
+          export BRAND_KEYSTORE_PASSWORD="$(trim "$BRAND_KEYSTORE_PASSWORD")" BRAND_KEY_ALIAS="$(trim "$BRAND_KEY_ALIAS")" BRAND_KEY_PASSWORD="$(trim "$BRAND_KEY_PASSWORD")"
+          TMDB_KEY="$(trim "$TMDB_KEY")"; MSG_TOPIC="$(trim "$MSG_TOPIC")"
           chmod +x gradlew
           mkdir -p ../out
           VERSION=$(cat ../VERSION)
