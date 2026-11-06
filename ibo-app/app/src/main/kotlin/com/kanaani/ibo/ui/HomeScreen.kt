@@ -65,7 +65,7 @@ fun HomeScreen(nav: Navigator, x: Xtream) {
     val first = remember { FocusRequester() }
     InitialFocus(first)
 
-    Backdrop {
+    Backdrop(com.kanaani.ibo.R.drawable.home_bg) {
         Column(Modifier.fillMaxSize().padding(horizontal = 40.dp, vertical = 20.dp)) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Logo(100.dp)

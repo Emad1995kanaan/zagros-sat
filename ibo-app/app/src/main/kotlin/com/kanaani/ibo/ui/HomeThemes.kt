@@ -160,7 +160,7 @@ fun BillboardHome(nav: Navigator, x: Xtream, now: Long) {
     LaunchedEffect(x, Ads.movieCount) { com.kanaani.ibo.data.Promo.refresh(x, Ads.movieCount) }
     val first = remember { FocusRequester() }
     InitialFocus(first)
-    Backdrop {
+    Backdrop(com.kanaani.ibo.R.drawable.home_bg) {
         Column(Modifier.fillMaxSize().padding(horizontal = 24.dp, vertical = 14.dp)) {
             ThemeHeader(now)
             Spacer(Modifier.height(10.dp))
@@ -215,7 +215,7 @@ fun QueenHome(nav: Navigator, x: Xtream, now: Long) {
     LaunchedEffect(x, Ads.movieCount) { com.kanaani.ibo.data.Promo.refresh(x, Ads.movieCount) }
     val first = remember { FocusRequester() }
     InitialFocus(first)
-    Backdrop {
+    Backdrop(com.kanaani.ibo.R.drawable.home_bg) {
         Column(Modifier.fillMaxSize().padding(horizontal = 26.dp, vertical = 14.dp)) {
             ThemeHeader(now)
             Spacer(Modifier.height(10.dp))

@@ -99,14 +99,18 @@ val Manrope = FontFamily(variable(R.font.manrope, 400), variable(R.font.manrope,
 
 /** Fond commun : dégradé bleu nuit + halo. */
 @Composable
-fun Backdrop(content: @Composable BoxScope.() -> Unit) {
+fun Backdrop(image: Int? = null, content: @Composable BoxScope.() -> Unit) {
     Box(
         Modifier
             .fillMaxSize()
             .background(Brush.verticalGradient(listOf(C.bgTop, C.bgBottom)))
             .background(Brush.radialGradient(listOf(C.glow, Color.Transparent))),
-        content = content,
-    )
+    ) {
+        // ZAGROS SAT : image de fond de l'accueil (sous tout le reste).
+        if (image != null) Image(painterResource(image), contentDescription = null, modifier = Modifier.fillMaxSize(),
+            contentScale = androidx.compose.ui.layout.ContentScale.Crop)
+        content()
+    }
 }
 
 /**
