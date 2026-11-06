@@ -83,11 +83,11 @@ object C {
     /** Cuivre (logo) : élément pointé / sélectionné. */
     val select = listOf(Color(0xFFF08A3C), Color(0xFFB0561A))
     /** Vert olive (logo) : Direct. */
-    val live = listOf(Color(0xFF5E7A28), Color(0xFF2F4210))
+    val live = listOf(Color(0xFF465C1C), Color(0xFF1F2D0A))
     /** Argent : Films (texte sombre dessus). */
     val movies = listOf(Color(0xFFFFFFFF), Color(0xFFADB3BC))
     /** Vert olive : Séries. */
-    val series = listOf(Color(0xFF5E7A28), Color(0xFF2F4210))
+    val series = listOf(Color(0xFF465C1C), Color(0xFF1F2D0A))
     val small = listOf(Color(0xFF1E1914), Color(0xFF0E0C0A))
     val danger = listOf(Color(0xFF7A1C2B), Color(0xFF4A0F1A))
     /** Texte / icône lisible sur une tuile de ces couleurs (sombre sur le blanc des Films). */
