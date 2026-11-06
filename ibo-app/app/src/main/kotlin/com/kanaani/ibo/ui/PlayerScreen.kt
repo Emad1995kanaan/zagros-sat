@@ -183,7 +183,12 @@ fun PlayerScreen(nav: Navigator, x: Xtream, s: Screen.Play, hosted: Boolean = fa
                         when (e.nativeKeyEvent.keyCode) {
                             KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_CHANNEL_UP -> { zap(+1); true }
                             KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_CHANNEL_DOWN -> { zap(-1); true }
-                            KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_INFO -> { infoTick++; true }
+                            // OK : retour à la page Direct complète (catégories, chaînes, aperçu) ; la chaîne continue.
+                            KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                                if (nav.stack.getOrNull(nav.stack.lastIndex - 1) is Screen.Live) nav.back() else infoTick++
+                                true
+                            }
+                            KeyEvent.KEYCODE_INFO -> { infoTick++; true }
                             // ◀ ▶ (inutilisés en direct), touche jaune ou Menu : format de l'image.
                             KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT, in ASPECT_KEYS -> { cycleAspect(); infoTick++; true }
                             else -> false
