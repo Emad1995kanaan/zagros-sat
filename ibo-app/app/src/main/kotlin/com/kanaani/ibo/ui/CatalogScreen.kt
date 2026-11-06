@@ -148,7 +148,7 @@ fun CatalogScreen(nav: Navigator, x: Xtream, s: Screen.Catalog) {
                                 val m = if (selected || (i == 0 && s.category == null)) Modifier.focusRequester(catFocus) else Modifier
                                 Tile({ if (s.category != c.id) { s.category = c.id; s.focusIndex = -1; s.filter = ""; s.searching = false } },
                                     m.fillMaxWidth().height(38.dp), RoundedCornerShape(10.dp),
-                                    colors = listOf(if (selected) C.cardHi else Color.Transparent), focusColors = C.live, focusScale = 1.02f) {
+                                    colors = listOf(if (selected) C.cardHi else Color.Transparent), focusColors = C.select, focusScale = 1.02f) {
                                     Box(Modifier.fillMaxSize().padding(horizontal = 12.dp), contentAlignment = Alignment.CenterStart) {
                                         Label(c.name, 13.sp, if (selected) C.text else C.text2, if (selected) FontWeight.Bold else FontWeight.Medium)
                                     }

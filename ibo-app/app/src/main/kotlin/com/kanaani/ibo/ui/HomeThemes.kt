@@ -145,7 +145,7 @@ private fun StackTile(label: String, icon: String, colors: List<Color>, modifier
 
 @Composable
 private fun BottomTile(label: String, icon: String, modifier: Modifier, onClick: () -> Unit) {
-    Tile(onClick, modifier.fillMaxHeight(), RoundedCornerShape(12.dp), colors = C.small, focusColors = C.live) {
+    Tile(onClick, modifier.fillMaxHeight(), RoundedCornerShape(12.dp), colors = C.small, focusColors = C.select) {
         Row(Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
             Icon(icon, 22.dp, Color.White, stroke = 1.8f)
             Spacer(Modifier.width(10.dp))

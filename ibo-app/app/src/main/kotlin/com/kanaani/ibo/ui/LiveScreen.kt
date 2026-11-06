@@ -136,7 +136,7 @@ fun LiveScreen(nav: Navigator, x: Xtream, s: Screen.Live) {
                             val m = if (i == focusAt) Modifier.focusRequester(catFocus) else Modifier
                             Tile({ if (s.category != c.id) { s.category = c.id; s.focusIndex = 0; s.filter = ""; s.searching = false } },
                                 m.fillMaxWidth().height(38.dp), RoundedCornerShape(10.dp),
-                                colors = listOf(if (selected) C.cardHi else Color.Transparent), focusColors = C.live, focusScale = 1.02f) {
+                                colors = listOf(if (selected) C.cardHi else Color.Transparent), focusColors = C.select, focusScale = 1.02f) {
                                 Box(Modifier.fillMaxSize().padding(horizontal = 12.dp), contentAlignment = Alignment.CenterStart) {
                                     Label(c.name, 13.sp, if (selected) C.text else C.text2, if (selected) FontWeight.Bold else FontWeight.Medium)
                                 }
@@ -178,7 +178,7 @@ fun LiveScreen(nav: Navigator, x: Xtream, s: Screen.Live) {
                         }
                         val fav = Store.isFavorite("live", p.id)
                         Tile({ Store.toggleFavorite(Favorite("live", p.id, p.name, p.logo)) }, Modifier.fillMaxWidth().height(40.dp),
-                            RoundedCornerShape(10.dp), colors = listOf(C.card), focusColors = C.live, focusScale = 1.02f) {
+                            RoundedCornerShape(10.dp), colors = listOf(C.card), focusColors = C.select, focusScale = 1.02f) {
                             Row(Modifier.fillMaxSize().padding(horizontal = 14.dp), verticalAlignment = Alignment.CenterVertically) {
                                 Icon(Icons.Star, 18.dp, if (fav) Color(0xFFFFC94D) else Color.White, fill = fav)
                                 Spacer(Modifier.width(10.dp))
@@ -195,12 +195,12 @@ fun LiveScreen(nav: Navigator, x: Xtream, s: Screen.Live) {
 @Composable
 private fun ChannelRow(c: Channel, index: Int, playing: Boolean, modifier: Modifier, onClick: () -> Unit) {
     Tile(onClick, modifier.fillMaxWidth().height(46.dp), RoundedCornerShape(10.dp),
-        colors = listOf(if (playing) C.cardHi else C.card), focusColors = C.live, focusScale = 1.02f) {
+        colors = listOf(if (playing) C.cardHi else C.card), focusColors = C.select, focusScale = 1.02f) { focused ->
         Row(Modifier.fillMaxSize().padding(horizontal = 10.dp), verticalAlignment = Alignment.CenterVertically) {
             Label("${if (c.number > 0) c.number else index + 1}", 12.sp, C.text3, modifier = Modifier.width(34.dp))
             AsyncImage(c.logo, null, Modifier.size(32.dp).clip(RoundedCornerShape(6.dp)), contentScale = ContentScale.Fit)
             Spacer(Modifier.width(10.dp))
-            Label(c.name, 14.sp, if (playing) C.focus else C.text, if (playing) FontWeight.Bold else FontWeight.Medium, modifier = Modifier.weight(1f))
+            Label(c.name, 14.sp, if (playing && !focused) C.focus else C.text, if (playing) FontWeight.Bold else FontWeight.Medium, modifier = Modifier.weight(1f))
         }
     }
 }

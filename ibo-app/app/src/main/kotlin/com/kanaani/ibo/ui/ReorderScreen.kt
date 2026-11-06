@@ -164,7 +164,7 @@ fun ReorderScreen(x: Xtream, s: Screen.Reorder) {
                                             .onFocusChanged { if (it.isFocused) focusedId = id },
                                         RoundedCornerShape(10.dp),
                                         colors = if (isSel) listOf(C.cardHi) else listOf(C.card),
-                                        focusColors = C.live,
+                                        focusColors = C.select,
                                         focusScale = 1.02f,
                                     ) {
                                         Row(Modifier.fillMaxSize().padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -230,7 +230,7 @@ fun ReorderScreen(x: Xtream, s: Screen.Reorder) {
 /** Bouton du panneau ; [dot] : pastille de la touche de couleur correspondante sur la télécommande. */
 @Composable
 private fun SideButton(label: String, dot: Color?, onClick: () -> Unit) {
-    Tile(onClick, Modifier.fillMaxWidth().height(33.dp), RoundedCornerShape(10.dp), colors = listOf(C.card), focusColors = C.live, focusScale = 1.03f) {
+    Tile(onClick, Modifier.fillMaxWidth().height(33.dp), RoundedCornerShape(10.dp), colors = listOf(C.card), focusColors = C.select, focusScale = 1.03f) {
         Row(Modifier.fillMaxSize().padding(horizontal = 10.dp), verticalAlignment = Alignment.CenterVertically) {
             Label(label, 13.sp, weight = FontWeight.SemiBold, modifier = Modifier.weight(1f))
             if (dot != null) Box(Modifier.size(12.dp).clip(RoundedCornerShape(6.dp)).background(dot))
@@ -240,7 +240,7 @@ private fun SideButton(label: String, dot: Color?, onClick: () -> Unit) {
 
 @Composable
 private fun BarButton(label: String, onClick: () -> Unit) {
-    Tile(onClick, Modifier.height(36.dp), RoundedCornerShape(10.dp), colors = listOf(C.card), focusColors = C.live, focusScale = 1.04f) {
+    Tile(onClick, Modifier.height(36.dp), RoundedCornerShape(10.dp), colors = listOf(C.card), focusColors = C.select, focusScale = 1.04f) {
         Box(Modifier.fillMaxHeight().padding(horizontal = 14.dp), contentAlignment = Alignment.Center) {
             Label(label, 13.sp, weight = FontWeight.SemiBold)
         }
@@ -285,10 +285,10 @@ private fun RenameDialog(current: String, original: String, onSave: (String) -> 
                 Tile({ onSave(text) }, Modifier.weight(1f).height(42.dp), RoundedCornerShape(10.dp), colors = C.live, focusScale = 1.03f) {
                     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Label(Str.save, 14.sp, weight = FontWeight.Bold) }
                 }
-                Tile(onRestore, Modifier.weight(1.4f).height(42.dp), RoundedCornerShape(10.dp), colors = listOf(C.card), focusColors = C.live, focusScale = 1.03f) {
+                Tile(onRestore, Modifier.weight(1.4f).height(42.dp), RoundedCornerShape(10.dp), colors = listOf(C.card), focusColors = C.select, focusScale = 1.03f) {
                     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Label(Str.restoreName, 13.sp, weight = FontWeight.SemiBold) }
                 }
-                Tile(onDismiss, Modifier.weight(1f).height(42.dp), RoundedCornerShape(10.dp), colors = listOf(C.card), focusColors = C.live, focusScale = 1.03f) {
+                Tile(onDismiss, Modifier.weight(1f).height(42.dp), RoundedCornerShape(10.dp), colors = listOf(C.card), focusColors = C.select, focusScale = 1.03f) {
                     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Label(Str.cancel, 14.sp, weight = FontWeight.SemiBold) }
                 }
             }

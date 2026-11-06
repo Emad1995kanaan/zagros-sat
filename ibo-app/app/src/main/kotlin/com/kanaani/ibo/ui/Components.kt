@@ -80,6 +80,8 @@ object C {
     val accentDark = Color(0xFF9A4A14)
     val focus = Color(0xFFF08A3C)
     val error = Color(0xFFFF9C9C)
+    /** Cuivre (logo) : élément pointé / sélectionné. */
+    val select = listOf(Color(0xFFF08A3C), Color(0xFFB0561A))
     /** Vert olive (logo) : Direct. */
     val live = listOf(Color(0xFF8DB43C), Color(0xFF4C6A1A))
     /** Argent : Films (texte sombre dessus). */
@@ -278,7 +280,7 @@ fun Field(
 fun SearchBox(open: Boolean, onOpen: (Boolean) -> Unit, value: String, onChange: (String) -> Unit, modifier: Modifier = Modifier, label: String = Str.searchButton) {
     val keyboard = androidx.compose.ui.platform.LocalSoftwareKeyboardController.current
     if (!open) {
-        Tile({ onOpen(true) }, modifier.height(40.dp), RoundedCornerShape(12.dp), colors = listOf(C.card), focusColors = C.live, focusScale = 1.03f) {
+        Tile({ onOpen(true) }, modifier.height(40.dp), RoundedCornerShape(12.dp), colors = listOf(C.card), focusColors = C.select, focusScale = 1.03f) {
             Row(Modifier.fillMaxSize().padding(horizontal = 14.dp), verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Search, 18.dp, Color.White)
                 Spacer(Modifier.width(10.dp))
@@ -296,7 +298,7 @@ fun SearchBox(open: Boolean, onOpen: (Boolean) -> Unit, value: String, onChange:
         Field(value, onChange, Str.search, Modifier.weight(1f), focusRequester = field, imeAction = ImeAction.Search, onDone = { keyboard?.hide() },
             startEditing = true, onBlur = { if (value.isBlank()) onOpen(false) })
         Spacer(Modifier.width(6.dp))
-        Tile({ keyboard?.hide(); onChange(""); onOpen(false) }, Modifier.size(40.dp), RoundedCornerShape(12.dp), colors = listOf(C.card), focusColors = C.live) {
+        Tile({ keyboard?.hide(); onChange(""); onOpen(false) }, Modifier.size(40.dp), RoundedCornerShape(12.dp), colors = listOf(C.card), focusColors = C.select) {
             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Label("✕", 15.sp, weight = FontWeight.Bold) }
         }
     }
@@ -316,7 +318,7 @@ fun ChoiceDialog(title: String, options: List<Pair<String, () -> Unit>>, onDismi
             Text(title, color = C.text, fontFamily = Sora, fontWeight = FontWeight.Bold, fontSize = 20.sp)
             options.forEachIndexed { i, (label, action) ->
                 Tile(action, Modifier.fillMaxWidth().height(48.dp).then(if (i == 0) Modifier.focusRequester(first) else Modifier),
-                    colors = listOf(C.card), focusColors = C.live, focusScale = 1.02f) {
+                    colors = listOf(C.card), focusColors = C.select, focusScale = 1.02f) {
                     Box(Modifier.fillMaxSize().padding(horizontal = 16.dp), contentAlignment = Alignment.CenterStart) { Label(label, 16.sp, weight = FontWeight.SemiBold) }
                 }
             }

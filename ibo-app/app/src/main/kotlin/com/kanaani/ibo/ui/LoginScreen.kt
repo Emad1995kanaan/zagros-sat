@@ -101,7 +101,7 @@ fun LoginScreen() {
                     Field(user, { user = it; error = null }, Str.username, Modifier.weight(1f), focusRequester = userFocus, numeric = numeric)
                     Spacer(Modifier.width(8.dp))
                     Tile({ keyboardCtl?.hide(); numeric = !numeric }, Modifier.width(64.dp).height(46.dp), RoundedCornerShape(12.dp),
-                        colors = listOf(C.card), focusColors = C.live, focusScale = 1.04f) {
+                        colors = listOf(C.card), focusColors = C.select, focusScale = 1.04f) {
                         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                             Label(if (numeric) Str.abcKeyboard else Str.numKeyboard, 14.sp, weight = FontWeight.Bold)
                         }

@@ -128,7 +128,7 @@ fun DownloadsScreen(nav: Navigator) {
                                 DlState.Paused, DlState.Failed -> Downloads.resume(d.key)
                             }
                         }, (if (i == 0) Modifier.focusRequester(first) else Modifier).weight(1f).height(72.dp),
-                            RoundedCornerShape(12.dp), colors = listOf(C.card), focusColors = C.live, focusScale = 1.02f) {
+                            RoundedCornerShape(12.dp), colors = listOf(C.card), focusColors = C.select, focusScale = 1.02f) {
                             Row(Modifier.fillMaxSize().padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
                                 Box(Modifier.width(100.dp).fillMaxHeight().clip(RoundedCornerShape(8.dp)).background(C.cardHi), contentAlignment = Alignment.Center) {
                                     Icon(Icons.Play, 18.dp, Color.White, fill = true)

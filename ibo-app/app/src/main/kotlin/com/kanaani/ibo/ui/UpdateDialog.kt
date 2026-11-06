@@ -119,7 +119,7 @@ fun UpdateDialog() {
 
 @Composable
 private fun DialogButton(label: String, primary: Boolean, modifier: Modifier, onClick: () -> Unit) {
-    Tile(onClick, modifier.height(44.dp), RoundedCornerShape(12.dp), colors = if (primary) C.live else listOf(C.card), focusColors = C.live, focusScale = 1.03f) {
+    Tile(onClick, modifier.height(44.dp), RoundedCornerShape(12.dp), colors = if (primary) C.live else listOf(C.card), focusColors = C.select, focusScale = 1.03f) {
         Box(Modifier.fillMaxSize().padding(horizontal = 10.dp), contentAlignment = Alignment.Center) { Label(label, 15.sp, weight = FontWeight.Bold) }
     }
 }

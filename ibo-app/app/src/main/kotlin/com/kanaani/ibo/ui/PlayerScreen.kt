@@ -285,7 +285,7 @@ fun PlayerScreen(nav: Navigator, x: Xtream, s: Screen.Play, hosted: Boolean = fa
                         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Label(Str.playNow, 13.sp, weight = FontWeight.Bold) }
                     }
                     Tile({ nextCancelled = true; nextCountdown = null }, Modifier.weight(1f).height(38.dp), RoundedCornerShape(10.dp),
-                        colors = listOf(C.card), focusColors = C.live, focusScale = 1.03f) {
+                        colors = listOf(C.card), focusColors = C.select, focusScale = 1.03f) {
                         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Label(Str.cancel, 13.sp, weight = FontWeight.SemiBold) }
                     }
                 }

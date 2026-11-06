@@ -63,7 +63,7 @@ private fun Meta(parts: List<String?>) {
 
 @Composable
 private fun ActionButton(label: String, icon: String, primary: Boolean, modifier: Modifier = Modifier, fill: Boolean = false, onClick: () -> Unit) {
-    Tile(onClick, modifier.height(44.dp), RoundedCornerShape(12.dp), colors = if (primary) C.live else listOf(C.card), focusColors = C.live, focusScale = 1.04f) {
+    Tile(onClick, modifier.height(44.dp), RoundedCornerShape(12.dp), colors = if (primary) C.live else listOf(C.card), focusColors = C.select, focusScale = 1.04f) {
         Row(Modifier.fillMaxHeight().padding(horizontal = 18.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(icon, 18.dp, Color.White, fill = fill || icon == Icons.Play)
             Spacer(Modifier.width(10.dp))
@@ -175,7 +175,7 @@ fun ShowDetailScreen(nav: Navigator, x: Xtream, s: Screen.ShowDetail) {
                     items(seasons.keys.toList(), key = { it }) { n ->
                         val on = s.season == n
                         Tile({ s.season = n }, Modifier.height(36.dp), RoundedCornerShape(18.dp),
-                            colors = if (on) C.live else listOf(C.card), focusColors = C.live, focusScale = 1.04f) {
+                            colors = if (on) C.live else listOf(C.card), focusColors = C.select, focusScale = 1.04f) {
                             Box(Modifier.fillMaxHeight().padding(horizontal = 16.dp), contentAlignment = Alignment.Center) {
                                 Label("${Str.season} $n", 13.sp, weight = if (on) FontWeight.Bold else FontWeight.Medium)
                             }
@@ -193,7 +193,7 @@ fun ShowDetailScreen(nav: Navigator, x: Xtream, s: Screen.ShowDetail) {
                                 watch = w, startMs = here?.pos ?: 0))
                         },
                             (if (i == 0) Modifier.focusRequester(firstEpisode) else Modifier).weight(1f).height(58.dp),
-                            RoundedCornerShape(12.dp), colors = listOf(C.card), focusColors = C.live, focusScale = 1.02f) {
+                            RoundedCornerShape(12.dp), colors = listOf(C.card), focusColors = C.select, focusScale = 1.02f) {
                             Row(Modifier.fillMaxSize().padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                                 Box(Modifier.width(80.dp).height(45.dp).clip(RoundedCornerShape(8.dp)).background(C.cardHi), contentAlignment = Alignment.Center) {
                                     Icon(Icons.Play, 16.dp, Color.White, fill = true)
@@ -218,7 +218,7 @@ fun ShowDetailScreen(nav: Navigator, x: Xtream, s: Screen.ShowDetail) {
                                 com.kanaani.ibo.data.DlState.Paused, com.kanaani.ibo.data.DlState.Failed -> com.kanaani.ibo.data.Downloads.resume(dl.key)
                                 else -> nav.go(Screen.Downloads)
                             }
-                        }, Modifier.size(58.dp), RoundedCornerShape(12.dp), colors = listOf(C.card), focusColors = C.live, focusScale = 1.04f) {
+                        }, Modifier.size(58.dp), RoundedCornerShape(12.dp), colors = listOf(C.card), focusColors = C.select, focusScale = 1.04f) {
                             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                                 when (dl?.state) {
                                     null -> Icon(Icons.Download, 22.dp, Color.White)

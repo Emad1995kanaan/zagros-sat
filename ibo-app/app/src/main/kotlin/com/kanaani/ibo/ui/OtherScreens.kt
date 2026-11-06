@@ -60,7 +60,7 @@ fun FavoritesScreen(nav: Navigator, x: Xtream) {
                 listOf("live" to Str.live, "movie" to Str.movies, "series" to Str.series).forEachIndexed { i, (k, label) ->
                     val on = tab == k
                     Tile({ tab = k }, (if (i == 0) Modifier.focusRequester(first) else Modifier).height(38.dp), RoundedCornerShape(19.dp),
-                        colors = if (on) C.live else listOf(C.card), focusColors = C.live, focusScale = 1.04f) {
+                        colors = if (on) C.live else listOf(C.card), focusColors = C.select, focusScale = 1.04f) {
                         Box(Modifier.padding(horizontal = 20.dp).height(38.dp), contentAlignment = Alignment.Center) {
                             Label(label, 14.sp, weight = if (on) FontWeight.Bold else FontWeight.Medium)
                         }
@@ -79,7 +79,7 @@ fun FavoritesScreen(nav: Navigator, x: Xtream) {
                         "live" -> Tile({
                             val channels = list.mapIndexed { n, c -> Channel(c.id, c.name, c.image, n + 1, null) }
                             nav.go(Screen.Play(f.name, x.liveUrl(f.id), live = true, channels = channels, index = i))
-                        }, Modifier.fillMaxWidth().height(56.dp), RoundedCornerShape(12.dp), colors = listOf(C.card), focusColors = C.live, focusScale = 1.03f) {
+                        }, Modifier.fillMaxWidth().height(56.dp), RoundedCornerShape(12.dp), colors = listOf(C.card), focusColors = C.select, focusScale = 1.03f) {
                             Row(Modifier.fillMaxSize().padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically) {
                                 AsyncImage(f.image, null, Modifier.size(36.dp).clip(RoundedCornerShape(6.dp)), contentScale = ContentScale.Fit)
                                 Spacer(Modifier.width(10.dp))
@@ -180,7 +180,7 @@ fun SettingsScreen(nav: Navigator, x: Xtream) {
             Row(Modifier.fillMaxWidth().height(112.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 row.forEachIndexed { i, item ->
                     Tile(item.onClick, (if (r == 0 && i == 0) Modifier.focusRequester(first) else Modifier).weight(1f).height(112.dp),
-                        RoundedCornerShape(18.dp), colors = item.colors, focusColors = C.live) {
+                        RoundedCornerShape(18.dp), colors = item.colors, focusColors = C.select) {
                         Column(Modifier.fillMaxSize().padding(10.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                             Icon(item.icon, 42.dp, Color.White, stroke = 1.6f)
                             Spacer(Modifier.height(12.dp))

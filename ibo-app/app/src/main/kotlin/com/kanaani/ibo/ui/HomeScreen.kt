@@ -144,7 +144,7 @@ private fun BigTile(label: String, icon: String, colors: List<Color>, modifier: 
 
 @Composable
 private fun SmallTile(label: String, icon: String, modifier: Modifier, onClick: () -> Unit) {
-    Tile(onClick, modifier.fillMaxSize(), RoundedCornerShape(14.dp), colors = C.small, focusColors = C.live) {
+    Tile(onClick, modifier.fillMaxSize(), RoundedCornerShape(14.dp), colors = C.small, focusColors = C.select) {
         Row(Modifier.fillMaxSize().padding(horizontal = 18.dp), verticalAlignment = Alignment.CenterVertically) {
             Icon(icon, 28.dp, Color.White, stroke = 1.8f)
             Spacer(Modifier.width(12.dp))
