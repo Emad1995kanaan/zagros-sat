@@ -1,4 +1,4 @@
-name: Build ZAGROS SAT APK
+name: Build ZAGROS PRO APK
 
 # كل push على main بيبني APK جديد. وبتقدر تشغّله يدوي من تبويب Actions → Run workflow.
 on:
@@ -67,13 +67,13 @@ jobs:
           ./gradlew assembleRelease -PBRAND_TMDB_KEY="$TMDB_KEY" -PBRAND_MSG_TOPIC="$MSG_TOPIC" --console=plain --stacktrace
           for f in app/build/outputs/apk/release/*.apk; do
             abi=$(basename "$f" .apk | sed -E 's/^app-//; s/-release.*//')
-            cp "$f" "../out/ZAGROS-SAT-$VERSION-$abi.apk"
+            cp "$f" "../out/ZAGROS-PRO-$VERSION-$abi.apk"
           done
           ls -la ../out
 
       # ريليز: مع كل بناء ناجح على main، باسم الإصدار من ملف VERSION (مثلاً v1.2.78). إذا موجود بيتحدّث.
-      # ZAGROS-SAT.apk اسمه ثابت، فرابط التحميل المباشر ما بيتغيّر:
-      # https://github.com/<owner>/<repo>/releases/latest/download/ZAGROS-SAT.apk
+      # ZAGROS-PRO.apk اسمه ثابت، فرابط التحميل المباشر ما بيتغيّر:
+      # https://github.com/<owner>/<repo>/releases/latest/download/ZAGROS-PRO.apk
       # بدون مفتاح التوقيع ما بننشر ريليز (نسخة بمفتاح مؤقت ما بتنفع كتحديث للزباين).
       - name: Publish release
         if: github.ref == 'refs/heads/main' && env.HAS_KEY == 'true'
@@ -83,13 +83,13 @@ jobs:
         run: |
           TAG="v$(cat VERSION)"
           mkdir -p release
-          cp out/ZAGROS-SAT-*-universal.apk release/ZAGROS-SAT.apk
-          # نسخة وحدة بس بالريليز: ZAGROS-SAT.apk بتشتغل على كل الأجهزة (جوال، شاشة، بوكس، تابلت أندرويد).
+          cp out/ZAGROS-PRO-*-universal.apk release/ZAGROS-PRO.apk
+          # نسخة وحدة بس بالريليز: ZAGROS-PRO.apk بتشتغل على كل الأجهزة (جوال، شاشة، بوكس، تابلت أندرويد).
           # update.json : lu par l'application pour proposer la mise à jour (versionCode = x*10000 + y*100 + z).
           IFS=. read -r MA MI PA < VERSION
           CODE=$((MA * 10000 + MI * 100 + PA))
-          SHA=$(sha256sum release/ZAGROS-SAT.apk | cut -d' ' -f1)
-          SIZE=$(stat -c %s release/ZAGROS-SAT.apk)
+          SHA=$(sha256sum release/ZAGROS-PRO.apk | cut -d' ' -f1)
+          SIZE=$(stat -c %s release/ZAGROS-PRO.apk)
           # ملاحظات الإصدار (بتطلع للزبون بنافذة التحديث): ملف ibo-app/update-notes.txt
           CODE="$CODE" SHA="$SHA" SIZE="$SIZE" TAG="$TAG" python3 - <<'PY'
           import json, os
@@ -97,24 +97,24 @@ jobs:
           notes = open("ibo-app/update-notes.txt", encoding="utf-8").read().strip() if os.path.exists("ibo-app/update-notes.txt") else ""
           data = {
               "versionCode": os.environ["CODE"], "versionName": v,
-              "url": f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/releases/download/{os.environ['TAG']}/ZAGROS-SAT.apk",
+              "url": f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/releases/download/{os.environ['TAG']}/ZAGROS-PRO.apk",
               "sha256": os.environ["SHA"], "size": os.environ["SIZE"], "notes": notes,
           }
           open("release/update.json", "w", encoding="utf-8").write(json.dumps(data, ensure_ascii=False))
           PY
           cat release/update.json
           if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release upload "$TAG" release/ZAGROS-SAT.apk release/update.json --repo "$GITHUB_REPOSITORY" --clobber
+            gh release upload "$TAG" release/ZAGROS-PRO.apk release/update.json --repo "$GITHUB_REPOSITORY" --clobber
           else
-            gh release create "$TAG" release/ZAGROS-SAT.apk release/update.json --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
-              --title "ZAGROS SAT $TAG" \
-              --notes "تطبيق ZAGROS SAT. للتحميل المباشر: ZAGROS-SAT.apk (بيشتغل على كل الأجهزة)." \
+            gh release create "$TAG" release/ZAGROS-PRO.apk release/update.json --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title "ZAGROS PRO $TAG" \
+              --notes "تطبيق ZAGROS PRO. للتحميل المباشر: ZAGROS-PRO.apk (بيشتغل على كل الأجهزة)." \
               --latest
           fi
-          # تنظيف: بكل الريليزات بيضل ZAGROS-SAT.apk و update.json بس.
+          # تنظيف: بكل الريليزات بيضل ZAGROS-PRO.apk و update.json بس.
           for t in $(gh release list --repo "$GITHUB_REPOSITORY" --limit 100 --json tagName -q '.[].tagName'); do
             for a in $(gh release view "$t" --repo "$GITHUB_REPOSITORY" --json assets -q '.assets[].name'); do
-              case "$a" in ZAGROS-SAT.apk|update.json) ;; *) gh release delete-asset "$t" "$a" --repo "$GITHUB_REPOSITORY" -y ;; esac
+              case "$a" in ZAGROS-PRO.apk|update.json) ;; *) gh release delete-asset "$t" "$a" --repo "$GITHUB_REPOSITORY" -y ;; esac
             done
           done
 
