@@ -200,7 +200,7 @@ private fun ChannelRow(c: Channel, index: Int, playing: Boolean, modifier: Modif
             Label("${if (c.number > 0) c.number else index + 1}", 12.sp, C.text3, modifier = Modifier.width(34.dp))
             AsyncImage(c.logo, null, Modifier.size(32.dp).clip(RoundedCornerShape(6.dp)), contentScale = ContentScale.Fit)
             Spacer(Modifier.width(10.dp))
-            Label(c.name, 14.sp, if (playing) Color(0xFFFF6B70) else C.text, if (playing) FontWeight.Bold else FontWeight.Medium, modifier = Modifier.weight(1f))
+            Label(c.name, 14.sp, if (playing) C.focus else C.text, if (playing) FontWeight.Bold else FontWeight.Medium, modifier = Modifier.weight(1f))
         }
     }
 }
